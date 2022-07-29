@@ -8,6 +8,7 @@ class FlatAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
     list_editable = ('new_building',)
     list_display = ('town', 'address','price', 'construction_year', 'new_building')
+    raw_id_fields = ('liked_by',)
 
 
 class ComplaintAdmin(admin.ModelAdmin):
@@ -16,4 +17,3 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 admin.site.register(Flat, FlatAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
-
