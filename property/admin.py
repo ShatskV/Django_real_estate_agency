@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Flat, Complaint
 
+
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town',)
     list_filter = ('new_building', 'rooms_number', 'has_balcony', )
