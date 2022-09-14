@@ -6,16 +6,17 @@ from django.db import migrations
 
 def update_pure_phone_numbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    flats = Flat.objects.all()
-    for flat in flats:
-        try:
-            phone_number = phonenumbers.parse(flat.owners_phonenumber, 'RU')
-        except Exception as e:
-            print(f'got error while parsing phone number: {e}')
-        
-        if phonenumbers.is_valid_number(phone_number):
-            flat.owner_pure_phone = phone_number
-            flat.save()
+    flat_set = Flat.objects.all()
+    if flat_set.exist():
+        for flat in flat_set.iterator():
+            try:
+                phone_number = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+            except Exception as e:
+                print(f'got error while parsing phone number: {e}')
+            
+            if phonenumbers.is_valid_number(phone_number):
+                flat.owner_pure_phone = phone_number
+                flat.save()
 
 
 class Migration(migrations.Migration):
